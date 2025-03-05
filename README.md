@@ -1,1 +1,2 @@
-# gitg-gdg.github.io
+# VCs: Git & Github workshop!
+
