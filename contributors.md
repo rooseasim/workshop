@@ -2,4 +2,5 @@
 
 - [Amjad Alqasemi](https://github.com/aqasemi)
 - [Jazzar](https://github.com/jaazzar)
-- [Rayan Ghabashi][https://github.com/rayan-ghabashi]
+- [Abdoo Shareef](https://github.com/Dope0603)
+- [Rayan Ghabashi :-)]("https://github.com/rayan-ghabashi")
