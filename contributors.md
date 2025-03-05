@@ -4,3 +4,4 @@
 - [Jazzar](https://github.com/jaazzar)
 - [Abdoo Shareef](https://github.com/Dope0603)
 - [Rayan Ghabashi :-)](https://github.com/rayan-ghabashi)
+- [Abdullah Bamufleh](https://abdullahbamufleh.github.io/)
