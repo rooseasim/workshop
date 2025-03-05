@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Workshop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #0056b9;
+            --secondary: #0366d6;
+            --background: #ffffff;
+            --text: #333333;
+            --light-gray: #f6f8fa;
+            --border: #e1e4e8;
+            --success: #2ea44f;
+            --github: #24292e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            font-weight: 400;
+            letter-spacing: -0.011em;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            font-weight: 500;
+            letter-spacing: -0.015em;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .step {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background-color: var(--light-gray);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+        }
+
+        pre {
+            background-color: #f8f8f8;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border: none;
+        }
+
+        .contributors {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .contributors h3 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+
+        .contributors ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+
+        .contributors li {
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            background-color: #fffde7;
+            padding: 1rem;
+            border-left: 4px solid #ffd600;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .success {
+            background-color: #e6ffed;
+            padding: 1rem;
+            border-left: 4px solid var(--success);
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background-color: var(--light-gray);
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--github);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            margin: 1rem 0;
+        }
+
+        .github-button:hover {
+            background-color: #2c3440;
+        }
+
+        .github-icon {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .step {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Git & GitHub Workshop</h1>
+        <p>Learn how to clone, modify, push, and create a pull request</p>
+        <a href="https://github.com/git-gdg/workshop" target="_blank" class="github-button">
+            <span class="github-icon">🐙</span> View on GitHub
+        </a>
+    </header>
+
+    <nav>
+        <a href="#prerequisites">Prerequisites</a>
+        <a href="#clone">Clone</a>
+        <a href="#modify">Modify</a>
+        <a href="#push">Push</a>
+        <a href="#pull-request">Pull Request</a>
+    </nav>
+
+    <section class="contributors">
+        <h3>Workshop Participants</h3>
+        <p>This section will show the names of everyone who has completed this workshop by submitting a pull request:</p>
+        <div id="contributors-loading">Loading contributors... <span class="loading"></span></div>
+        <ul id="contributors-list">
+        </ul>
+    </section>
+
+    <main>
+        <section id="prerequisites">
+            <h2>Prerequisites</h2>
+            <div class="step">
+                <h3><span class="step-number">1</span>Install Git</h3>
+                <p>Make sure you have Git installed on your computer. You can download it from <a href="https://git-scm.com/downloads" target="_blank">git-scm.com</a>.</p>
+                <p>Verify your installation by running:</p>
+                <pre><code>git --version</code></pre>
+            </div>
+            <div class="step">
+                <h3><span class="step-number">2</span>Install Github CLI</h3>
+                <p>To make our life easier, we will use Github CLI to handle git login and authentication with Github. You can download it from <a href="https://cli.github.com/" target="_blank">cli.github.com</a>.</p>
+                <p>Verify your installation by running:</p>
+                <pre><code>gh --version</code></pre>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3</span>Create a GitHub Account</h3>
+                <p>If you don't have a GitHub account yet, create one at <a href="https://github.com/join" target="_blank">github.com/join</a>.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">4</span>git authentication</h3>
+                <p>Authenticate with Github using the following command:</p>
+                <pre><code>gh auth login</code></pre>
+            </div>
+
+            <!-- <div class="step">
+                <h3><span class="step-number">5</span>Configure Git</h3>
+                <p>Set up your Git identity with your name and email:</p>
+                <pre><code>git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"</code></pre>
+            </div> -->
+        </section>
+
+        <section id="clone">
+            <h2>Step 1: Fork & clone the Repository</h2>
+            <div class="step">
+                <p>First, fork the repository to your GitHub account:</p>
+                <img src="./workshop/images/fork.png" alt="Fork the repository" style="max-width: 100%; margin: 1rem 0;">
+                <p>Click on the "Fork" button in the top right corner of the repository page. Accept and continue.</p>
+                <hr style="margin: 1rem 0;">
+                <p>Then clone the forked repo so that we can work on it. Cloning creates a local copy of the repository on your computer.</p>
+                <pre><code>git clone https://github.com/&lt;your-username&gt;/workshop.git
+cd workshop</code></pre>
+            </div>
+        </section>
+
+        <section id="modify">
+            <h2>Step 2: Make Changes</h2>
+            <div class="step">
+                <h3><span class="step-number">1</span>Create a New Branch</h3>
+                <p>It's a good practice to create a new branch for your changes:</p>
+                <pre><code>git checkout -b add-your-name</code></pre>
+                <p>Replace <code>add-your-name</code> with a descriptive branch name.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span>Add Your Name to the Contributors List</h3>
+                <p>Open the <code>contributors.md</code> file (or the file specified by your instructor) and add your name to the list:</p>
+                <pre><code>## Contributors
+
+- [Your Name](https://github.com/yourusername)</code></pre>
+                <p>Save the file after making your changes.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3</span>Check Your Changes</h3>
+                <p>See what files you've modified:</p>
+                <pre><code>git status</code></pre>
+                <p>Review the changes you've made:</p>
+                <pre><code>git diff</code></pre>
+            </div>
+        </section>
+
+        <section id="push">
+            <h2>Step 3: Commit and Push Your Changes</h2>
+            <div class="step">
+                <h3><span class="step-number">1</span>Stage Your Changes</h3>
+                <p>Add your modified files to the staging area:</p>
+                <pre><code>git add contributors.md</code></pre>
+                <p>Or to add all changed files:</p>
+                <pre><code>git add .</code></pre>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span>Commit Your Changes</h3>
+                <p>Save your changes with a descriptive commit message:</p>
+                <pre><code>git commit -m "Add [Your Name] to contributors list"</code></pre>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3</span>Push Your Changes</h3>
+                <p>Upload your changes to GitHub:</p>
+                <pre><code>git push origin add-your-name</code></pre>
+                <p>Replace <code>add-your-name</code> with the name of your branch.</p>
+                
+                <div class="note">
+                    <p><strong>Note:</strong> If this is your first time pushing to GitHub, you might be asked to authenticate.</p>
+                    <p><strong>Note:</strong> If you're using <code>gh cli</code> you should be all set. If you're using HTTPS, you might need to enter your GitHub credentials. If you're using SSH, make sure you have set up your SSH keys.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pull-request">
+            <h2>Step 4: Create a Pull Request</h2>
+            <div class="step">
+                <h3><span class="step-number">1</span>Go to the Repository on GitHub</h3>
+                <p>Open your web browser and navigate to the original repository on GitHub.</p>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2</span>Create a New Pull Request</h3>
+                <p>You should see a prompt to create a pull request for your recently pushed branch. If not:</p>
+                <ol>
+                    <li>Click on the "Pull requests" tab</li>
+                    <li>Click the "New pull request" button</li>
+                    <li>Select your branch from the "compare" dropdown</li>
+                    <li>Click "Create pull request"</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3</span>Fill in the Pull Request Details</h3>
+                <p>Add a title and description for your pull request:</p>
+                <ul>
+                    <li><strong>Title:</strong> Add [Your Name] to contributors list</li>
+                    <li><strong>Description:</strong> Briefly explain what you've done and why</li>
+                </ul>
+                <p>Click "Create pull request" to submit.</p>
+                
+                <div class="success">
+                    <p><strong>Congratulations!</strong> You've successfully created a pull request. Now wait for the repository maintainer to review and merge your changes.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created for the Git & GitHub Workshop | <a href="https://github.com" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script>
+        function appendContributor(contributorsList, url, name) {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = url;
+            link.textContent = name;
+            listItem.appendChild(link);
+            contributorsList.appendChild(listItem);
+        }
+
+        async function loadContributors() {
+            const contributorsList = document.getElementById('contributors-list');
+            const loadingElement = document.getElementById('contributors-loading');
+            
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/git-gdg/workshop/refs/heads/main/contributors.md');
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load contributors: ${response.status} ${response.statusText}`);
+                }
+                
+                const text = await response.text();
+                
+                const contributorRegex = /-\s*\[(.*?)\]\((.*?)\)/g;
+                let match;
+                
+                while ((match = contributorRegex.exec(text)) !== null) {
+                    const name = match[1];
+                    const url = match[2];
+                    appendContributor(contributorsList, url, name);
+                }
+                
+                loadingElement.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading contributors:', error);
+                loadingElement.textContent = 'Could not load contributors. You might be the first one!';
+            }
+            appendContributor(contributorsList, "#", "You 🫵🗣️🗣️")
+        }
+        
+        // Load contributors when the page loads
+        window.addEventListener('DOMContentLoaded', loadContributors);
+    </script>
+</body>
+</html>
